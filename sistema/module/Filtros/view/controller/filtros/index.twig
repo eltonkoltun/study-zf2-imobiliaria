@@ -1,0 +1,138 @@
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# Extende o layout #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% extends 'layout/layout' %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# TITLE #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block title %}{{ parent() }} - Usuários{% endblock title %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# CONTENT #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Filtros <small>({{ quantidade|number_format() }})</small></h3>
+                </div>
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="{{ url('filtros|form') }}" class="ink-button green push-right">Novo filtro...</a>
+                </div>
+            </div>
+            <form action="{{ url('filtros') }}" method="get" role="form">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Procurar</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="por" class="control-label">Por</label>
+                            <input id="por" name="por" value="{{ form.get('por').getValue() }}" class="form-control">
+                            <span class="help-block">Age no campo Nome.</span>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button id="procurar" type="submit" class="btn btn-info">Procurar</button>
+                        {% if emPesquisa %}
+                            <a href="{{ url('filtros') }}" class="btn btn-default">Limpar filtro</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ tituloGrid|raw }}</h3>
+                </div>
+                <div class="panel-body">
+                    {% if registros|length %}
+                        <table id="rotas" class="table">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-4">Nome</th>
+                                    <th class="col-md-1">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for registro in registros %}
+                                    <tr id="filtro_{{ registro.getId() }}"  {% if registro.isVisivel() != 1 %}class="text-muted"{% endif %}>
+                                        <td><a href="{{ url('filtros|form', {'id': registro.getId()}) }}">{{ registro.getNome() }}</a></td>
+                                        <td>
+                                            
+                                            <div class="dropdown">
+                                                <a data-toggle="dropdown" class="btn btn-primary btn-xs" href="javascript:void(0);"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+                                                    <li><a href="{{ url('filtros|form', {'id': registro.getId() }) }}"><span class="glyphicon glyphicon-edit"></span> {% if permiteAlterar %}Editar{% else %}Visualizar{% endif %}</a></li>
+                                                    
+                                                    {% if permiteAlterar %}
+                                                        <li><a href="{{ url('filtros|visivel', {'id': registro.getId() }) }}" class="desativar">{% if registro.isVisivel() %}<span class="glyphicon glyphicon-thumbs-down"></span> Desa{% else %}<span class="glyphicon glyphicon-thumbs-up"></span> A{% endif %}tivar</a></a></li>
+                                                        <li><a href="{{ url('filtros|excluir', {'id': registro.getId() }) }}" class="excluir"><span class="glyphicon glyphicon-remove"></span> Excluir</a></a></li>
+                                                    {% endif %}
+
+                                                </ul>
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <span class="text-muted">Nenhum registro encontrado!</span>
+                    {% endif %}
+                </div>
+                {% if registros.getPages().pagesInRange|length > 1 %}
+                    <div class="panel-footer">
+                        {{ paginationControl(registros, 'Sliding', 'shift.partial.paginator', {'route': 'filtros'}) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="destativar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Atenção</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a href="" class="btn btn-primary">Continuar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block inlineScript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+
+        {% if not protegido and not inserindo %}
+                $('.desativar, .excluir').click(function() {
+
+                    situacao = $(this).text();
+                    situacao = situacao.toLowerCase();
+                    $('.modal-body').html("Deseja " + situacao + " este registro?");
+                    $('.btn-primary').attr("href", $(this).attr('href'));
+                    $('#destativar').modal('toggle');
+                    return false;
+
+                });
+        {% endif %}
+            });
+    </script>
+{% endblock inlineScript %}

@@ -1,0 +1,86 @@
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# Extende o layout #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% extends 'layout/layout' %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# TITLE #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block title %}{{ parent() }} - {{ title }}{% endblock title %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# CONTENT #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <form action="{{ url('filtros|form') }}" method="post" role="form">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ title }}</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    {{ formHidden(form.get('csrf')) }}
+                    
+                    <input type="hidden" name="filtro[id]" value="{{ form.get('filtro').get('id').getValue() }}" />
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="filtro[nome]" class="control-label">Nome</label>
+                                <input id="filtro[nome]" name="filtro[nome]" value="{{ form.get('filtro').get('nome').getValue() }}" class="form-control" maxlength="50">
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="filtro[pai]" class="control-label">Filtro</label>
+                                {{ formSelect(form.get('filtro').get('pai')) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <input id="filtro[visivel]" name="filtro[visivel]" type="hidden" value="0">
+                                    <label>
+                                        <input id="filtro[visivel]" name="filtro[visivel]" type="checkbox" value="1" {% if form.get('filtro').get('visivel').getValue() %}checked="checked"{% endif %}>
+                                        Está página está visível.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    {% if permiteAlterar %}
+                        <button id="salvar" type="submit" class="btn btn-primary">Salvar</button>
+                    {% endif %}
+                    <a href="{{ backTo() }}" class="btn btn-default">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# JAVASCRIPT (inline) #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block inlineScript %}
+{{ parent() }}
+<script type="text/javascript">
+    $(function() {
+        $('form').remoteform({
+            onOkForwardTo: '{{ backTo() }}'
+        });
+    });
+</script>
+{% endblock inlineScript %}

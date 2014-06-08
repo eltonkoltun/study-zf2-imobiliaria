@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/var/www/imobiliaria/sistema/module/Cms/src/Controller/CmsController.php</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Usuarios/view/controller/usuarios/form.twig</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Usuarios/src/Controller/UsuariosController.php</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Filtros/src/Controller/FiltrosController.php</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Filtros/view/controller/filtros/form.twig</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Filtros/view/controller/filtros/index.twig</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Usuarios/view/controller/usuarios/index.twig</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Cms/view/controller/cms/index.twig</file>
+            <file>file:/var/www/imobiliaria/sistema/module/Filtros/src/Form/FiltroFieldset.php</file>
+        </group>
+    </open-files>
+</project-private>

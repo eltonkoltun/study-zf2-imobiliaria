@@ -1,0 +1,13 @@
+{
+    "name": "noLoop/imobiliaria",
+    "description": "Sistema para gerenciamento de imobiliaria.",
+    "license": "proprietary",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.2.*",
+        "doctrine/doctrine-module": "0.*",
+        "doctrine/doctrine-orm-module": "0.*",
+        "zf-commons/zfc-twig": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master"
+    }
+}

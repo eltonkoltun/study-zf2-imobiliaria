@@ -1,0 +1,6 @@
+AddType font/opentype woff
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !=/favicon.ico
+RewriteRule ^ index.php [QSA,L]

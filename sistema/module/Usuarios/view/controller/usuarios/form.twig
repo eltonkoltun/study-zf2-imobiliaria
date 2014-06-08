@@ -1,0 +1,94 @@
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# Extende o layout #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% extends 'layout/layout' %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# TITLE #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block title %}{{ parent() }} - {{ title }}{% endblock title %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# CONTENT #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <form action="{{ url('usuarios|form') }}" method="post" role="form">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ title }}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ formHidden(form.get('csrf')) }}
+                    <input type="hidden" name="usuario[id]" value="{{ form.get('usuario').get('id').getValue() }}" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="usuario[nome]" class="control-label">Nome</label>
+                                <input id="usuario[nome]" name="usuario[nome]" value="{{ form.get('usuario').get('nome').getValue() }}" class="form-control" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="usuario[email]" class="control-label">Email</label>
+                                <input id="usuario[email]" name="usuario[email]" value="{{ form.get('usuario').get('email').getValue() }}" autocomplete="off" class="form-control" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="usuario[senha]" class="control-label">Senha</label>
+                                <input id="usuario[senha]" name="usuario[senha]" type="password" autocomplete="off" class="form-control" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="usuario[senha2]" class="control-label">Repetir a senha</label>
+                                <input id="usuario[senha2]" name="usuario[senha2]" type="password" autocomplete="off" class="form-control" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <input id="usuario[visivel]" name="usuario[visivel]" type="hidden" value="0">
+                                    <label>
+                                        <input id="usuario[visivel]" name="usuario[visivel]" type="checkbox" value="1" {% if form.get('usuario').get('visivel').getValue() %}checked="checked"{% endif %}>
+                                        Este usuário está visível e pode logar-se no sistema.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    {% if permiteAlterar %}
+                        <button id="salvar" type="submit" class="btn btn-primary">Salvar</button>
+                    {% endif %}
+                    <a href="{{ backTo() }}" class="btn btn-default">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{# JAVASCRIPT (inline) #}
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+{% block inlineScript %}
+{{ parent() }}
+<script type="text/javascript">
+    $(function() {
+        $('form').remoteform({
+            onOkForwardTo: '{{ backTo() }}'
+        });
+    });
+</script>
+{% endblock inlineScript %}
