@@ -17,6 +17,7 @@ $config = array(
         'Usuarios',
         'Filtros',
         'Cms',
+        'Geo',
         'Application',
         'ZfcTwig', // deve ser o último módulo. ver: https://github.com/ZF-Commons/ZfcTwig/issues/34
     ),
