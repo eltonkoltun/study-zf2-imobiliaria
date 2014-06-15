@@ -86,6 +86,11 @@ class FiltrosController extends AbstractActionController {
             }
             return new JsonModel($retorno);
         }
+        
+        
+        /// é necessario setar o pai no form, pois retorna como objeto do banco
+        $form->get('pai')->setValue($filtro->getPai()->getId());
+        
         $form->prepare();
         return array(
             'title' => $title,

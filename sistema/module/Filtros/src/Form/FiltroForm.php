@@ -7,6 +7,7 @@ use Shift\SM;
 
 class FiltroForm extends Form
 {
+
     public function __construct()
     {
         parent::__construct('filtro_form');
@@ -31,8 +32,8 @@ class FiltroForm extends Form
         ));
         $this->add(array(
             'name' => 'pai',
-//            'type'  => 'Zend\Form\Element\Select',
-            'type'  => 'DoctrineModule\Form\Element\ObjectSelect',
+            'type'  => 'Zend\Form\Element\Select',
+//            'type'  => 'DoctrineModule\Form\Element\ObjectSelect',
             'attributes' => array(
                 'id' => 'pai',
                 'class' => 'form-control',
@@ -48,4 +49,5 @@ class FiltroForm extends Form
             ),
         ));
     }
+
 }
