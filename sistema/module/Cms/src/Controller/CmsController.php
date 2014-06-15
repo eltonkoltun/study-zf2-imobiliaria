@@ -4,7 +4,6 @@ namespace Cms\Controller;
 
 use Shift\SM;
 use Cms\Entity\Cms;
-use Cms\Form\CmsFieldset;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
@@ -43,28 +42,38 @@ class CmsController extends AbstractActionController {
     }
 
     public function formAction() {
+        
+        $form = SM::get('cms.form.cms');
+        $cms = null;
+        
         if ($this->request->isGet()) {
             $id = (int) $this->params('id');
         } else {
-            $id = (int) $this->request->getPost()->cms['id'];
+            $id = (int) $this->request->getPost()->id;
         }
-        $cms = null;
+        
         if ($id) {
             $cms = $this->cmsService->get($id);
-        }
-        if (!$cms) {
+            $title = "Editando {$cms->getTitulo()}";
+        } else {
             $cms = new Cms();
             $title = 'Nova página editável';
-        } else {
-            $title = "Editando {$cms->getTitulo()}";
         }
-        $form = SM::get('cms.form.cms');
+        
         $form->bind($cms);
+        
         if ($this->request->isPost()) {
             $retorno = array();
-            $post = $this->request->getPost();
-            $form->setData($post);
+            
+            // seta o grupo que deve ser validado
+            //$form->setValidationGroup('id', 'titulo', 'description');
+            
+            // seta os filtros para validacao do form
+            $form->setInputFilter($cms->getInputFilter());
+            $form->setData($this->request->getPost());
+            
             if ($form->isValid()) {
+                
                 $this->cmsService->save($cms);
                 $this->flash()->success('Operação realizada com sucesso.');
                 $this->highlight("tr#cms_{$cms->getId()}");
@@ -76,11 +85,12 @@ class CmsController extends AbstractActionController {
             }
             return new JsonModel($retorno);
         }
+        
         $form->prepare();
+        
         return array(
             'title' => $title,
             'form' => $form,
-            'cmsPrototype' => new CmsFieldset(),
             'cms' => $cms,
             'permiteAlterar' => $this->_usuario->permissao->alterar,
         );
@@ -126,6 +136,7 @@ class CmsController extends AbstractActionController {
     }
 
     private function emPesquisa() {
+        
         foreach ($this->params()->fromQuery() as $key => $value) {
             if ($value != '') {
                 return true;
@@ -133,5 +144,4 @@ class CmsController extends AbstractActionController {
         }
         return false;
     }
-
 }

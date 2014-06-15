@@ -6,6 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Shift\Entity\BaseEntity;
 use Shift\SM;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
 /**
  * @ORM\Table(name="usuarios")
@@ -119,6 +123,139 @@ class Usuario extends BaseEntity
     public function getPerfil()
     {
         return $this->perfil;
+    }
+    
+    /**
+     * Configura os filtros dos campos da entidade
+     *
+     * @return Zend\InputFilter\InputFilter
+     */
+    public function getInputFilter()
+    {
+        
+        if (!isset($this->inputFilter)) {
+            
+            $inputFilter = new InputFilter();
+            $factory     = new InputFactory();
+            
+            $em = SM::get('doctrine.entitymanager.orm_default');
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'nome',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min'      => 1,
+                            'max'      => 50,
+                        ),
+                    ),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'email',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                    array(
+                        'name' => 'EmailAddress',
+                    ),
+                    array(
+                        'name' => 'DoctrineModule\Validator\UniqueObject',
+                        'options' => array(
+                            'object_manager' => $em,
+                            'object_repository' => $em->getRepository('Usuarios\Entity\Usuario'),
+                            'fields' => 'email',
+                            'messages' => array(
+                                'objectNotUnique' => 'Este email não pode ser utilizado.',
+                            ),
+                        ),
+                    ),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'senha',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min'      => 6,
+                            'max'      => 20,
+                        ),
+                    ),
+                    array(
+                        'name' => 'Identical',
+                        'options' => array(
+                            'token' => 'senha2',
+                            'messages' => array(
+                                'notSame' => 'As senhas não combinam.',
+                            ),
+                        ),
+                    )
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'senha2',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min'      => 6,
+                            'max'      => 20,
+                        ),
+                    ),
+                )
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'visivel',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'Boolean')
+                )
+            )));
+            
+            $this->inputFilter = $inputFilter;
+        }
+        
+        return $this->inputFilter;
+        
     }
 
 }

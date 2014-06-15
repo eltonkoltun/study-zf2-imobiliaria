@@ -52,31 +52,33 @@ class __TwigTemplate_f66fe74a6c74889ad44549b220e3edb28905192d3381450daf071a7435e
         echo "</h3>
                 </div>
                 <div class=\"panel-body\">
+                    
                     ";
-        // line 23
+        // line 24
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formHidden")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "id"), "method"));
+        echo "                    
+                    ";
+        // line 25
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formHidden")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "csrf"), "method"));
         echo "
-                    <input type=\"hidden\" name=\"usuario[id]\" value=\"";
-        // line 24
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "usuario"), "method"), "get", array(0 => "id"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" />
+                    
                     <div class=\"row\">
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"usuario[nome]\" class=\"control-label\">Nome</label>
-                                <input id=\"usuario[nome]\" name=\"usuario[nome]\" value=\"";
-        // line 29
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "usuario"), "method"), "get", array(0 => "nome"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" class=\"form-control\" maxlength=\"50\">
+                                <label for=\"nome\" class=\"control-label\">Nome</label>
+                                ";
+        // line 31
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "nome"), "method"));
+        echo "
                             </div>
                         </div>
                         <div class=\"col-md-8\">
                             <div class=\"form-group\">
-                                <label for=\"usuario[email]\" class=\"control-label\">Email</label>
-                                <input id=\"usuario[email]\" name=\"usuario[email]\" value=\"";
-        // line 35
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "usuario"), "method"), "get", array(0 => "email"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" autocomplete=\"off\" class=\"form-control\" maxlength=\"50\">
+                                <label for=\"email\" class=\"control-label\">Email</label>
+                                ";
+        // line 37
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "email"), "method"));
+        echo "
                             </div>
                         </div>
                     </div>
@@ -84,14 +86,20 @@ class __TwigTemplate_f66fe74a6c74889ad44549b220e3edb28905192d3381450daf071a7435e
                         
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"usuario[senha]\" class=\"control-label\">Senha</label>
-                                <input id=\"usuario[senha]\" name=\"usuario[senha]\" type=\"password\" autocomplete=\"off\" class=\"form-control\" maxlength=\"50\">
+                                <label for=\"senha\" class=\"control-label\">Senha</label>
+                                ";
+        // line 46
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "senha"), "method"));
+        echo "
                             </div>
                         </div>
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"usuario[senha2]\" class=\"control-label\">Repetir a senha</label>
-                                <input id=\"usuario[senha2]\" name=\"usuario[senha2]\" type=\"password\" autocomplete=\"off\" class=\"form-control\" maxlength=\"50\">
+                                <label for=\"senha2\" class=\"control-label\">Repetir a senha</label>
+                                ";
+        // line 52
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "senha2"), "method"));
+        echo "
                             </div>
                         </div>
                     </div>
@@ -100,14 +108,11 @@ class __TwigTemplate_f66fe74a6c74889ad44549b220e3edb28905192d3381450daf071a7435e
                         <div class=\"col-md-12\">
                             <div class=\"form-group\">
                                 <div class=\"checkbox\">
-                                    <input id=\"usuario[visivel]\" name=\"usuario[visivel]\" type=\"hidden\" value=\"0\">
                                     <label>
-                                        <input id=\"usuario[visivel]\" name=\"usuario[visivel]\" type=\"checkbox\" value=\"1\" ";
-        // line 61
-        if ($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "usuario"), "method"), "get", array(0 => "visivel"), "method"), "getValue", array(), "method")) {
-            echo "checked=\"checked\"";
-        }
-        echo ">
+                                        ";
+        // line 62
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "visivel"), "method"));
+        echo "
                                         Este usuário está visível e pode logar-se no sistema.
                                     </label>
                                 </div>
@@ -118,13 +123,13 @@ class __TwigTemplate_f66fe74a6c74889ad44549b220e3edb28905192d3381450daf071a7435e
                 </div>
                 <div class=\"panel-footer\">
                     ";
-        // line 71
+        // line 72
         if ((isset($context["permiteAlterar"]) ? $context["permiteAlterar"] : null)) {
-            // line 72
+            // line 73
             echo "                        <button id=\"salvar\" type=\"submit\" class=\"btn btn-primary\">Salvar</button>
                     ";
         }
-        // line 74
+        // line 75
         echo "                    <a href=\"";
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("backTo")->__invoke();
         echo "\" class=\"btn btn-default\">Voltar</a>
@@ -136,17 +141,17 @@ class __TwigTemplate_f66fe74a6c74889ad44549b220e3edb28905192d3381450daf071a7435e
 ";
     }
 
-    // line 85
+    // line 86
     public function block_inlineScript($context, array $blocks = array())
     {
-        // line 86
+        // line 87
         $this->displayParentBlock("inlineScript", $context, $blocks);
         echo "
 <script type=\"text/javascript\">
     \$(function() {
         \$('form').remoteform({
             onOkForwardTo: '";
-        // line 90
+        // line 91
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("backTo")->__invoke();
         echo "'
         });
@@ -167,6 +172,6 @@ class __TwigTemplate_f66fe74a6c74889ad44549b220e3edb28905192d3381450daf071a7435e
 
     public function getDebugInfo()
     {
-        return array (  150 => 90,  143 => 86,  140 => 85,  128 => 74,  124 => 72,  122 => 71,  107 => 61,  78 => 35,  69 => 29,  61 => 24,  57 => 23,  51 => 20,  45 => 17,  41 => 15,  38 => 14,  30 => 9,);
+        return array (  155 => 91,  148 => 87,  145 => 86,  133 => 75,  129 => 73,  127 => 72,  114 => 62,  101 => 52,  92 => 46,  80 => 37,  71 => 31,  62 => 25,  58 => 24,  51 => 20,  45 => 17,  41 => 15,  38 => 14,  30 => 9,);
     }
 }

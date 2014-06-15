@@ -20,19 +20,21 @@
                     <h3 class="panel-title">{{ title }}</h3>
                 </div>
                 <div class="panel-body">
+                    
+                    {{ formHidden(form.get('id')) }}                    
                     {{ formHidden(form.get('csrf')) }}
-                    <input type="hidden" name="usuario[id]" value="{{ form.get('usuario').get('id').getValue() }}" />
+                    
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="usuario[nome]" class="control-label">Nome</label>
-                                <input id="usuario[nome]" name="usuario[nome]" value="{{ form.get('usuario').get('nome').getValue() }}" class="form-control" maxlength="50">
+                                <label for="nome" class="control-label">Nome</label>
+                                {{ formElement(form.get('nome')) }}
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="usuario[email]" class="control-label">Email</label>
-                                <input id="usuario[email]" name="usuario[email]" value="{{ form.get('usuario').get('email').getValue() }}" autocomplete="off" class="form-control" maxlength="50">
+                                <label for="email" class="control-label">Email</label>
+                                {{ formElement(form.get('email')) }}
                             </div>
                         </div>
                     </div>
@@ -40,14 +42,14 @@
                         
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="usuario[senha]" class="control-label">Senha</label>
-                                <input id="usuario[senha]" name="usuario[senha]" type="password" autocomplete="off" class="form-control" maxlength="50">
+                                <label for="senha" class="control-label">Senha</label>
+                                {{ formElement(form.get('senha')) }}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="usuario[senha2]" class="control-label">Repetir a senha</label>
-                                <input id="usuario[senha2]" name="usuario[senha2]" type="password" autocomplete="off" class="form-control" maxlength="50">
+                                <label for="senha2" class="control-label">Repetir a senha</label>
+                                {{ formElement(form.get('senha2')) }}
                             </div>
                         </div>
                     </div>
@@ -56,9 +58,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="checkbox">
-                                    <input id="usuario[visivel]" name="usuario[visivel]" type="hidden" value="0">
                                     <label>
-                                        <input id="usuario[visivel]" name="usuario[visivel]" type="checkbox" value="1" {% if form.get('usuario').get('visivel').getValue() %}checked="checked"{% endif %}>
+                                        {{ formElement(form.get('visivel')) }}
                                         Este usuário está visível e pode logar-se no sistema.
                                     </label>
                                 </div>

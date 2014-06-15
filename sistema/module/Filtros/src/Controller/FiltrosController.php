@@ -4,7 +4,6 @@ namespace Filtros\Controller;
 
 use Shift\SM;
 use Filtros\Entity\Filtro;
-use Filtros\Form\FiltroFieldset;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
@@ -44,30 +43,37 @@ class FiltrosController extends AbstractActionController {
     }
 
     public function formAction() {
+        
+        $filtro = null;
+        $form = SM::get('filtros.form.filtro');
+        
         if ($this->request->isGet()) {
             $id = (int) $this->params('id');
         } else {
-            $id = (int) $this->request->getPost()->filtro['id'];
+            $id = (int) $this->request->getPost()->id;
         }
-        $filtro = null;
+        
         if ($id) {
             $filtro = $this->filtrosService->get($id);
-        }
-        
-        if (!$filtro) {
+            $title = "Editando {$filtro->getNome()}";
+        } else {
             $filtro = new Filtro();
             $title = 'Novo filtro';
-        } else {
-            $title = "Editando {$filtro->getNome()}";
         }
-        
-        $form = SM::get('filtros.form.filtro');
-        
+               
         $form->bind($filtro);
+        
         if ($this->request->isPost()) {
+            
             $retorno = array();
-            $post = $this->request->getPost();
-            $form->setData($post);
+            
+            // seta o grupo que deve ser validado
+            //$form->setValidationGroup('id', 'titulo', 'description');
+            
+            // seta os filtros para validacao do form
+            $form->setInputFilter($filtro->getInputFilter());
+            $form->setData($this->request->getPost());
+            
             if ($form->isValid()) {
                 $this->filtrosService->save($filtro);
                 $this->flash()->success('Operação realizada com sucesso.');
@@ -84,7 +90,6 @@ class FiltrosController extends AbstractActionController {
         return array(
             'title' => $title,
             'form' => $form,
-            'filtrosPrototype' => new FiltroFieldset(),
             'filtro' => $filtro,
             'permiteAlterar' => $this->_usuario->permissao->alterar,
         );

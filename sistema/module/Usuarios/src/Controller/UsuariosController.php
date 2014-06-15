@@ -4,7 +4,6 @@ namespace Usuarios\Controller;
 
 use Shift\SM;
 use Usuarios\Entity\Usuario;
-use Usuarios\Form\UsuarioFieldset;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
@@ -42,27 +41,36 @@ class UsuariosController extends AbstractActionController {
     }
 
     public function formAction() {
+        
+        $form = SM::get('usuarios.form.usuario');
+        $usuario = null;
+        
         if ($this->request->isGet()) {
             $id = (int) $this->params('id');
         } else {
-            $id = (int) $this->request->getPost()->usuario['id'];
+            $id = (int) $this->request->getPost()->id;
         }
-        $usuario = null;
+        
         if ($id) {
             $usuario = $this->usuariosService->get($id);
-        }
-        if (!$usuario) {
+            $title = "Editando {$usuario->getNome()}";
+        } else {
             $usuario = new Usuario();
             $title = 'Novo usuário';
-        } else {
-            $title = "Editando {$usuario->getNome()}";
-        }
-        $form = SM::get('usuarios.form.usuario');
+        }        
+        
         $form->bind($usuario);
+        
         if ($this->request->isPost()) {
             $retorno = array();
-            $post = $this->request->getPost();
-            $form->setData($post);
+
+            // seta o grupo que deve ser validado
+            //$form->setValidationGroup('id', 'titulo', 'description');
+            
+            // seta os filtros para validacao do form
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($this->request->getPost());
+            
             if ($form->isValid()) {
                 $this->usuariosService->save($usuario);
                 $this->flash()->success('Operação realizada com sucesso.');
@@ -76,10 +84,10 @@ class UsuariosController extends AbstractActionController {
             return new JsonModel($retorno);
         }
         $form->prepare();
+        
         return array(
             'title' => $title,
             'form' => $form,
-            'usuarioPrototype' => new UsuarioFieldset(),
             'usuario' => $usuario,
             'inserindo' => (!$usuario->getId()),
             'permiteAlterar' => $this->_usuario->permissao->alterar,

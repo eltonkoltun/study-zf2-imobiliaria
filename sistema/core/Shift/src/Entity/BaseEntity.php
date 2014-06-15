@@ -11,7 +11,7 @@ use Shift\SM;
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
  */
-class BaseEntity
+class BaseEntity extends Entity
 {
     /**
      * @var integer

@@ -55,22 +55,21 @@ class __TwigTemplate_33ede1270bba14abcd53d16fac0a08612921bde6f35969abc11a4d1a59a
                     
                     ";
         // line 24
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formHidden")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "id"), "method"));
+        echo "                    
+                    ";
+        // line 25
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formHidden")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "csrf"), "method"));
         echo "
-                    
-                    <input type=\"hidden\" name=\"filtro[id]\" value=\"";
-        // line 26
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "filtro"), "method"), "get", array(0 => "id"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" />
                     
                     <div class=\"row\">
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"filtro[nome]\" class=\"control-label\">Nome</label>
-                                <input id=\"filtro[nome]\" name=\"filtro[nome]\" value=\"";
-        // line 32
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "filtro"), "method"), "get", array(0 => "nome"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" class=\"form-control\" maxlength=\"50\">
+                                <label for=\"nome\" class=\"control-label\">Nome</label>
+                                ";
+        // line 31
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "nome"), "method"));
+        echo "
                             </div>
                         </div>                        
                     </div>
@@ -78,10 +77,10 @@ class __TwigTemplate_33ede1270bba14abcd53d16fac0a08612921bde6f35969abc11a4d1a59a
                     <div class=\"row\">
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"filtro[pai]\" class=\"control-label\">Filtro</label>
+                                <label for=\"pai\" class=\"control-label\">Filtro</label>
                                 ";
-        // line 41
-        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formSelect")->__invoke($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "filtro"), "method"), "get", array(0 => "pai"), "method"));
+        // line 40
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formSelect")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "pai"), "method"));
         echo "
                             </div>
                         </div>
@@ -92,15 +91,12 @@ class __TwigTemplate_33ede1270bba14abcd53d16fac0a08612921bde6f35969abc11a4d1a59a
                         <div class=\"col-md-12\">
                             <div class=\"form-group\">
                                 <div class=\"checkbox\">
-                                    <input id=\"filtro[visivel]\" name=\"filtro[visivel]\" type=\"hidden\" value=\"0\">
                                     <label>
-                                        <input id=\"filtro[visivel]\" name=\"filtro[visivel]\" type=\"checkbox\" value=\"1\" ";
-        // line 53
-        if ($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "filtro"), "method"), "get", array(0 => "visivel"), "method"), "getValue", array(), "method")) {
-            echo "checked=\"checked\"";
-        }
-        echo ">
-                                        Está página está visível.
+                                        ";
+        // line 51
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "visivel"), "method"));
+        echo "
+                                        Este filtro está visível.
                                     </label>
                                 </div>
                             </div>
@@ -110,13 +106,13 @@ class __TwigTemplate_33ede1270bba14abcd53d16fac0a08612921bde6f35969abc11a4d1a59a
                 </div>
                 <div class=\"panel-footer\">
                     ";
-        // line 63
+        // line 61
         if ((isset($context["permiteAlterar"]) ? $context["permiteAlterar"] : null)) {
-            // line 64
+            // line 62
             echo "                        <button id=\"salvar\" type=\"submit\" class=\"btn btn-primary\">Salvar</button>
                     ";
         }
-        // line 66
+        // line 64
         echo "                    <a href=\"";
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("backTo")->__invoke();
         echo "\" class=\"btn btn-default\">Voltar</a>
@@ -128,17 +124,17 @@ class __TwigTemplate_33ede1270bba14abcd53d16fac0a08612921bde6f35969abc11a4d1a59a
 ";
     }
 
-    // line 77
+    // line 75
     public function block_inlineScript($context, array $blocks = array())
     {
-        // line 78
+        // line 76
         $this->displayParentBlock("inlineScript", $context, $blocks);
         echo "
 <script type=\"text/javascript\">
     \$(function() {
         \$('form').remoteform({
             onOkForwardTo: '";
-        // line 82
+        // line 80
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("backTo")->__invoke();
         echo "'
         });
@@ -159,6 +155,6 @@ class __TwigTemplate_33ede1270bba14abcd53d16fac0a08612921bde6f35969abc11a4d1a59a
 
     public function getDebugInfo()
     {
-        return array (  142 => 82,  135 => 78,  132 => 77,  120 => 66,  116 => 64,  114 => 63,  99 => 53,  84 => 41,  72 => 32,  63 => 26,  58 => 24,  51 => 20,  45 => 17,  41 => 15,  38 => 14,  30 => 9,);
+        return array (  138 => 80,  131 => 76,  128 => 75,  116 => 64,  112 => 62,  110 => 61,  97 => 51,  83 => 40,  71 => 31,  62 => 25,  58 => 24,  51 => 20,  45 => 17,  41 => 15,  38 => 14,  30 => 9,);
     }
 }

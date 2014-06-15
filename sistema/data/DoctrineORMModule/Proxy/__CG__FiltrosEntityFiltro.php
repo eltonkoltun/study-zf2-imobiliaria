@@ -51,9 +51,28 @@ class Filtro extends \Filtros\Entity\Filtro implements \Doctrine\ORM\Proxy\Proxy
         $this->__cloner__      = $cloner;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param string $name
+     */
+    public function __get($name)
+    {
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__get', array($name));
 
+        return parent::__get($name);
+    }
 
+    /**
+     * {@inheritDoc}
+     * @param string $name
+     * @param mixed  $value
+     */
+    public function __set($name, $value)
+    {
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__set', array($name, $value));
 
+        return parent::__set($name, $value);
+    }
 
 
 
@@ -64,10 +83,10 @@ class Filtro extends \Filtros\Entity\Filtro implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'nome', 'pai', 'filhos', 'id', 'cliente_id', 'criacao', 'alteracao', 'visivel');
+            return array('__isInitialized__', 'nome', 'pai', 'filhos', 'id', 'cliente_id', 'criacao', 'alteracao', 'visivel', 'inputFilter');
         }
 
-        return array('__isInitialized__', 'nome', 'pai', 'filhos', 'id', 'cliente_id', 'criacao', 'alteracao', 'visivel');
+        return array('__isInitialized__', 'nome', 'pai', 'filhos', 'id', 'cliente_id', 'criacao', 'alteracao', 'visivel', 'inputFilter');
     }
 
     /**
@@ -253,6 +272,17 @@ class Filtro extends \Filtros\Entity\Filtro implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getInputFilter()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInputFilter', array());
+
+        return parent::getInputFilter();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -373,6 +403,83 @@ class Filtro extends \Filtros\Entity\Filtro implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'isVisivel', array());
 
         return parent::isVisivel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTableName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTableName', array());
+
+        return parent::getTableName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setData($data)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setData', array($data));
+
+        return parent::setData($data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getData()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getData', array());
+
+        return parent::getData();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function exchangeArray($data)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'exchangeArray', array($data));
+
+        return parent::exchangeArray($data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArrayCopy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrayCopy', array());
+
+        return parent::getArrayCopy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setInputFilter(\Zend\InputFilter\InputFilterInterface $inputFilter)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInputFilter', array($inputFilter));
+
+        return parent::setInputFilter($inputFilter);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function toArray()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array());
+
+        return parent::toArray();
     }
 
 }

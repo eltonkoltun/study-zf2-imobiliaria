@@ -40,102 +40,99 @@ class __TwigTemplate_3db75728ec6af0a14e8042dc9f65c6c9f441929babdff0dad7d1f9b1e92
         // line 15
         echo "<div class=\"row\">
     <div class=\"col-md-12\">
+        
         <form action=\"";
-        // line 17
+        // line 18
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("url")->__invoke("cms|form");
         echo "\" method=\"post\" role=\"form\">
             <div class=\"panel panel-default\">
                 <div class=\"panel-heading\">
                     <h3 class=\"panel-title\">";
-        // line 20
+        // line 21
         echo twig_escape_filter($this->env, (isset($context["title"]) ? $context["title"] : null), "html", null, true);
         echo "</h3>
                 </div>
                 <div class=\"panel-body\">
+                    
                     ";
-        // line 23
+        // line 25
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formHidden")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "id"), "method"));
+        echo "                    
+                    ";
+        // line 26
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formHidden")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "csrf"), "method"));
         echo "
-                    <input type=\"hidden\" name=\"cms[id]\" value=\"";
-        // line 24
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "cms"), "method"), "get", array(0 => "id"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" />
                     
                     <div class=\"row\">
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"cms[titulo]\" class=\"control-label\">Titulo</label>
-                                <input id=\"cms[titulo]\" name=\"cms[titulo]\" value=\"";
-        // line 30
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "cms"), "method"), "get", array(0 => "titulo"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "\" class=\"form-control\" maxlength=\"50\">
-                            </div>
-                        </div>                        
-                    </div>
-                            
-                    <div class=\"row\">
-                        <div class=\"col-md-4\">
-                            <div class=\"form-group\">
-                                <label for=\"cms[texto]\" class=\"control-label\">Texto</label>
-                                <textarea id=\"cms[texto]\" name=\"cms[texto]\" class=\"form-control\">";
-        // line 39
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "cms"), "method"), "get", array(0 => "texto"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "</textarea>
+                                <label for=\"titulo\" class=\"control-label\">Titulo</label>
+                                ";
+        // line 32
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "titulo"), "method"));
+        echo "
                             </div>
                         </div>                        
                     </div>
                     <div class=\"row\">
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"cms[metaDescricao]\" class=\"control-label\">Meta tag descrição</label>
-                                <textarea id=\"cms[metaDescricao]\" name=\"cms[metaDescricao]\" class=\"form-control\">";
-        // line 47
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "cms"), "method"), "get", array(0 => "metaDescricao"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "</textarea>
+                                <label for=\"texto\" class=\"control-label\">Texto</label>
+                                ";
+        // line 40
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "texto"), "method"));
+        echo "
                             </div>
                         </div>                        
                     </div>
                     <div class=\"row\">
                         <div class=\"col-md-4\">
                             <div class=\"form-group\">
-                                <label for=\"cms[metaPalavrasChave]\" class=\"control-label\">Meta palavras chave</label>
-                                <textarea id=\"cms[metaPalavrasChave]\" name=\"cms[metaPalavrasChave]\" class=\"form-control\">";
-        // line 55
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "cms"), "method"), "get", array(0 => "metaPalavrasChave"), "method"), "getValue", array(), "method"), "html", null, true);
-        echo "</textarea>
+                                <label for=\"metaDescricao\" class=\"control-label\">Meta Descrição</label>
+                                ";
+        // line 48
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "metaDescricao"), "method"));
+        echo "
                             </div>
                         </div>                        
                     </div>
-                    
                     <div class=\"row\">
-                        <div class=\"col-md-12\">
+                        <div class=\"col-md-4\">
+                            <div class=\"form-group\">
+                                <label for=\"metaPalavrasChave\" class=\"control-label\">Meta Palavras chave</label>
+                                ";
+        // line 56
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "metaPalavrasChave"), "method"));
+        echo "
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class=\"row\">
+                        <div class=\"col-md-4\">
                             <div class=\"form-group\">
                                 <div class=\"checkbox\">
-                                    <input id=\"cms[visivel]\" name=\"cms[visivel]\" type=\"hidden\" value=\"0\">
                                     <label>
-                                        <input id=\"cms[visivel]\" name=\"cms[visivel]\" type=\"checkbox\" value=\"1\" ";
-        // line 66
-        if ($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "cms"), "method"), "get", array(0 => "visivel"), "method"), "getValue", array(), "method")) {
-            echo "checked=\"checked\"";
-        }
-        echo ">
+                                        ";
+        // line 65
+        echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("formElement")->__invoke($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "get", array(0 => "visivel"), "method"));
+        echo "
                                         Está página está visível.
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
 
                 </div>
                 <div class=\"panel-footer\">
                     ";
-        // line 76
+        // line 75
         if ((isset($context["permiteAlterar"]) ? $context["permiteAlterar"] : null)) {
-            // line 77
+            // line 76
             echo "                        <button id=\"salvar\" type=\"submit\" class=\"btn btn-primary\">Salvar</button>
                     ";
         }
-        // line 79
+        // line 78
         echo "                    <a href=\"";
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("backTo")->__invoke();
         echo "\" class=\"btn btn-default\">Voltar</a>
@@ -147,17 +144,17 @@ class __TwigTemplate_3db75728ec6af0a14e8042dc9f65c6c9f441929babdff0dad7d1f9b1e92
 ";
     }
 
-    // line 90
+    // line 89
     public function block_inlineScript($context, array $blocks = array())
     {
-        // line 91
+        // line 90
         $this->displayParentBlock("inlineScript", $context, $blocks);
         echo "
 <script type=\"text/javascript\">
     \$(function() {
         \$('form').remoteform({
             onOkForwardTo: '";
-        // line 95
+        // line 94
         echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("backTo")->__invoke();
         echo "'
         });
@@ -178,6 +175,6 @@ class __TwigTemplate_3db75728ec6af0a14e8042dc9f65c6c9f441929babdff0dad7d1f9b1e92
 
     public function getDebugInfo()
     {
-        return array (  161 => 95,  154 => 91,  151 => 90,  139 => 79,  135 => 77,  133 => 76,  118 => 66,  104 => 55,  93 => 47,  82 => 39,  70 => 30,  61 => 24,  57 => 23,  51 => 20,  45 => 17,  41 => 15,  38 => 14,  30 => 9,);
+        return array (  158 => 94,  151 => 90,  148 => 89,  136 => 78,  132 => 76,  130 => 75,  117 => 65,  105 => 56,  94 => 48,  83 => 40,  72 => 32,  63 => 26,  59 => 25,  52 => 21,  46 => 18,  41 => 15,  38 => 14,  30 => 9,);
     }
 }

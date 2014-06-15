@@ -29,7 +29,7 @@ class Module
         
         // criar arquivo de cache que retorne os dados do cliente
         // ;)
-        $cliente = (object) array('id' => 1, 'permissao' => (object) array('alterar' => 0));
+        $cliente = (object) array('id' => 1, 'permissao' => (object) array('alterar' => 1));
         
         SM::setCliente($cliente);
     }

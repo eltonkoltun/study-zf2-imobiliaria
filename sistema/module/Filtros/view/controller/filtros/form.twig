@@ -21,15 +21,14 @@
                 </div>
                 <div class="panel-body">
                     
+                    {{ formHidden(form.get('id')) }}                    
                     {{ formHidden(form.get('csrf')) }}
-                    
-                    <input type="hidden" name="filtro[id]" value="{{ form.get('filtro').get('id').getValue() }}" />
                     
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="filtro[nome]" class="control-label">Nome</label>
-                                <input id="filtro[nome]" name="filtro[nome]" value="{{ form.get('filtro').get('nome').getValue() }}" class="form-control" maxlength="50">
+                                <label for="nome" class="control-label">Nome</label>
+                                {{ formElement(form.get('nome')) }}
                             </div>
                         </div>                        
                     </div>
@@ -37,8 +36,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="filtro[pai]" class="control-label">Filtro</label>
-                                {{ formSelect(form.get('filtro').get('pai')) }}
+                                <label for="pai" class="control-label">Filtro</label>
+                                {{ formSelect(form.get('pai')) }}
                             </div>
                         </div>
                     </div>
@@ -48,10 +47,9 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="checkbox">
-                                    <input id="filtro[visivel]" name="filtro[visivel]" type="hidden" value="0">
                                     <label>
-                                        <input id="filtro[visivel]" name="filtro[visivel]" type="checkbox" value="1" {% if form.get('filtro').get('visivel').getValue() %}checked="checked"{% endif %}>
-                                        Está página está visível.
+                                        {{ formElement(form.get('visivel')) }}
+                                        Este filtro está visível.
                                     </label>
                                 </div>
                             </div>

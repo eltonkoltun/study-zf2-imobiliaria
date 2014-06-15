@@ -6,6 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Shift\Entity\BaseEntity;
 use Shift\SM;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
 /**
  * @ORM\Table(name="filtros")
@@ -31,7 +35,7 @@ class Filtro extends BaseEntity
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Filtro", mappedBy="pai", indexBy="id", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"id"="asc"})
+     * @ORM\OrderBy({"nome"="asc"})
      */
     protected $filhos;
     
@@ -91,5 +95,77 @@ class Filtro extends BaseEntity
     {
         return $this->filhos;
     }
-
+    
+    /**
+     * Configura os filtros dos campos da entidade
+     *
+     * @return Zend\InputFilter\InputFilter
+     */
+    public function getInputFilter()
+    {
+        if (!isset($this->inputFilter)) {
+            
+            $inputFilter = new InputFilter();
+            $factory     = new InputFactory();
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'nome',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min'      => 1,
+                            'max'      => 60,
+                        ),
+                    ),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'pai',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'InArray',
+                        'options' => array(
+                            'haystack' => array_keys(SM::get('filtros.service.filtros')->lista()),
+                            'messages' => array(
+                                'notInArray' => 'O item selecionado não está na lista'
+                            ),
+                        ),
+                    ),
+                ),
+            )));
+           
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'visivel',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'Boolean')
+                )
+            )));
+            
+            $this->inputFilter = $inputFilter;
+        }
+        
+        return $this->inputFilter;
+        
+    }
+    
 }

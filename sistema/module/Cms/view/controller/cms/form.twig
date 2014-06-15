@@ -14,61 +14,60 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
+        
         <form action="{{ url('cms|form') }}" method="post" role="form">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ title }}</h3>
                 </div>
                 <div class="panel-body">
+                    
+                    {{ formHidden(form.get('id')) }}                    
                     {{ formHidden(form.get('csrf')) }}
-                    <input type="hidden" name="cms[id]" value="{{ form.get('cms').get('id').getValue() }}" />
                     
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="cms[titulo]" class="control-label">Titulo</label>
-                                <input id="cms[titulo]" name="cms[titulo]" value="{{ form.get('cms').get('titulo').getValue() }}" class="form-control" maxlength="50">
-                            </div>
-                        </div>                        
-                    </div>
-                            
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="cms[texto]" class="control-label">Texto</label>
-                                <textarea id="cms[texto]" name="cms[texto]" class="form-control">{{ form.get('cms').get('texto').getValue() }}</textarea>
+                                <label for="titulo" class="control-label">Titulo</label>
+                                {{ formElement(form.get('titulo')) }}
                             </div>
                         </div>                        
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="cms[metaDescricao]" class="control-label">Meta tag descrição</label>
-                                <textarea id="cms[metaDescricao]" name="cms[metaDescricao]" class="form-control">{{ form.get('cms').get('metaDescricao').getValue() }}</textarea>
+                                <label for="texto" class="control-label">Texto</label>
+                                {{ formElement(form.get('texto')) }}
                             </div>
                         </div>                        
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="cms[metaPalavrasChave]" class="control-label">Meta palavras chave</label>
-                                <textarea id="cms[metaPalavrasChave]" name="cms[metaPalavrasChave]" class="form-control">{{ form.get('cms').get('metaPalavrasChave').getValue() }}</textarea>
+                                <label for="metaDescricao" class="control-label">Meta Descrição</label>
+                                {{ formElement(form.get('metaDescricao')) }}
                             </div>
                         </div>                        
                     </div>
-                    
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="metaPalavrasChave" class="control-label">Meta Palavras chave</label>
+                                {{ formElement(form.get('metaPalavrasChave')) }}
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <div class="checkbox">
-                                    <input id="cms[visivel]" name="cms[visivel]" type="hidden" value="0">
                                     <label>
-                                        <input id="cms[visivel]" name="cms[visivel]" type="checkbox" value="1" {% if form.get('cms').get('visivel').getValue() %}checked="checked"{% endif %}>
+                                        {{ formElement(form.get('visivel')) }}
                                         Está página está visível.
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
 
                 </div>

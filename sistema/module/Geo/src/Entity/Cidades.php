@@ -30,7 +30,7 @@ class Cidades
     protected $nome;
     
     /**
-     * @var Filtro
+     * @var Estados
      *
      * @ORM\ManyToOne(targetEntity="Estados", inversedBy="filhos")
      * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")

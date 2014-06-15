@@ -82,6 +82,12 @@ class FiltrosService extends BaseService {
 
         // seta o id do cliente
         $filtro->setClienteId();
+        
+        if($filtro->getPai() > 0){
+            $filtro->setPai($this->get($filtro->getPai()));
+        } else {
+            $filtro->setPai(null);
+        }
 
         $this->em->persist($filtro);
         $this->em->flush();
